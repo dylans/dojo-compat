@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="/bower_components/dgrid/css/skins/claro.css">
 	</head>
 	<body class="claro">
+		<!-- TODO: implement a filter UI for dojo version, browser version, platforms, etc., and some preset filters like evergreen browsers, desktop, mobile, etc. -->
 		<div id="compatGrid"></div>
 		<script>
 			var dojoConfig = {
@@ -15,6 +16,7 @@
 		</script>
 		<script src="/bower_components/dojo/dojo.js"></script>
 		<script>
+			// TODO: Move this to a main.js
 			require([
 				'dojo/_base/declare',
 				'dgrid/OnDemandGrid',
@@ -29,6 +31,8 @@
 				RequestMemory,
 				TreeStoreMixin
 			) {
+				// TODO: Move some of this to modules to include
+				// TODO: Decide what columns to show by default
 				var columns = [
 					{field: 'id', label: 'Dojo version', renderExpando: true},
 					{field: 'ie11', label: 'IE 11'},
@@ -37,18 +41,24 @@
 				var Grid = new declare([OnDemandGrid, Tree]);
 				var Store = new declare([RequestMemory, TreeStoreMixin], {
 					mayHaveChildren: function (object) {
-						return object.type === 'minor';
+						return (object.type === 'minor' || object.type === 'major');
 					}
 				});
 
 				var collection = new Store({
 					target: 'data/dojo-compat.json'
-				}).filter({"type": "minor"});
+				}).filter({"type": "major"});
 				var grid = new Grid({
 					collection: collection,
 					columns: columns
-				}, 'compatGrid')
+				}, 'compatGrid');
 				grid.startup();
+				// TODO: Decide how to make the rendering more interesting
+				// TODO: Decide how to show notes or hints about a release (tooltip or a legend or ?)
+				// TODO, how to make sure filter has finished to not need a silly timeout? Do we move the creation of the collection into a forEach loop, and then create and startup the grid afterwards? I tried various promise approaches around the collection and filter, but they didn't seem to work?
+				window.setTimeout(function () {
+					grid.expand(grid.row('1.y.x'));
+				}, 1000);
 			});
 		</script>
 	</body>
