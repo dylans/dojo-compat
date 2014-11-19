@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link>
+	</head>
+	<body>
+		<div id="compatGrid"></div>
+		<script>
+			var dojoConfig = {
+				async: 1,
+				isDebug: 1,
+				packages: {
+					'dojo',
+					'dijit',
+					'dgrid',
+					'dstore'
+				}
+			}
+		</script>
+		<script src="/dojo/dojo.js"></script>
+		<script>
+			require([
+				'dojo/_base/declare',
+				'dgrid/OnDemandGrid',
+				'dstore/RequestMemory'
+
+			], function (
+				declare,
+				OnDemandGrid,
+				RequestMemory
+			) {
+				var collection = new RequestMemory({
+					target: 'data/dojo-compat.json'
+				});
+				var columns = [
+					{field: 'id', label: 'Dojo version'},
+					{field: 'ie11', label: 'IE 11'},
+					{field: 'ff33', label: 'Firefox 33'}
+				];
+				var Grid = new declare([OnDemandGrid]);
+				var grid = new Grid({
+					collection: collection,
+				}, 'compatGrid')
+			});
+		</script>
+	</body>
+</html>

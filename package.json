@@ -1,0 +1,29 @@
+{
+	"name": "dojo-compat",
+	"author": "Dylan Schiemann",
+	"version": "1.10.2",
+	"description": "A demo that shows compatibility information about various Dojo releases",
+	"licenses": [
+		{
+			"type": "AFLv2.1",
+			"url": "https://spdx.org/licenses/AFL-2.1"
+		},
+		{
+			"type": "BSD",
+			"url": "http://opensource.org/licenses/BSD-3-Clause"
+		}
+	],
+	"repository": {
+		"type":"git",
+		"url":"http://github.com/dylans/dojo-compat"
+	},
+	"devDependencies": {
+		"intern": "~2"
+	},
+	"directories": {
+		"doc": "./doc",
+		"lib": "."
+	},
+	"main": "./main",
+	"dojoBuild": "package.js"
+}

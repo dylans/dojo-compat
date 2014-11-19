@@ -1,0 +1,31 @@
+{
+	"name": "dojo-compat",
+	"description": "A demo that shows compatibility information about various Dojo releases",
+	"keywords": [
+		"dojo",
+		"grid",
+		"dgrid"
+	],
+	"authors": [
+		"Dylan Schiemann"
+	],
+	"main": "main.js",
+	"homepage": "http://dojotoolkit.org/",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/dylans/dojo-compat"
+	},
+	"dependencies": {
+		"dojo": ">=1.8.1",
+		"dstore": "~1.0",
+		"xstyle": ">=0.1.3",
+		"put-selector": ">=0.3.6",
+		"dgrid": ">=0.4.0"
+	},
+	"ignore": [
+		".*",
+		"test"
+	],
+	"license": [ "AFL-2.1", "BSD-3-Clause" ],
+	"moduleType": [ "amd" ]
+}
