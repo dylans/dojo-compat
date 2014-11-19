@@ -2,46 +2,53 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link>
+		<title>Dojo compatibility matrix</title>
+		<link rel="stylesheet" href="/bower_components/dgrid/css/skins/claro.css">
 	</head>
-	<body>
+	<body class="claro">
 		<div id="compatGrid"></div>
 		<script>
 			var dojoConfig = {
 				async: 1,
-				isDebug: 1,
-				packages: {
-					'dojo',
-					'dijit',
-					'dgrid',
-					'dstore'
-				}
+				isDebug: 1
 			}
 		</script>
-		<script src="/dojo/dojo.js"></script>
+		<script src="/bower_components/dojo/dojo.js"></script>
 		<script>
 			require([
 				'dojo/_base/declare',
 				'dgrid/OnDemandGrid',
-				'dstore/RequestMemory'
-
+				'dgrid/Tree',
+				'dstore/RequestMemory',
+				'dstore/Tree',
+				'dojo/domReady!'
 			], function (
 				declare,
 				OnDemandGrid,
-				RequestMemory
+				Tree,
+				RequestMemory,
+				TreeStoreMixin
 			) {
-				var collection = new RequestMemory({
-					target: 'data/dojo-compat.json'
-				});
 				var columns = [
-					{field: 'id', label: 'Dojo version'},
+					{field: 'id', label: 'Dojo version', renderExpando: true},
 					{field: 'ie11', label: 'IE 11'},
 					{field: 'ff33', label: 'Firefox 33'}
 				];
-				var Grid = new declare([OnDemandGrid]);
+				var Grid = new declare([OnDemandGrid, Tree]);
+				var Store = new declare([RequestMemory, TreeStoreMixin], {
+					mayHaveChildren: function (object) {
+						return object.type === 'minor';
+					}
+				});
+
+				var collection = new Store({
+					target: 'data/dojo-compat.json'
+				}).filter({"type": "minor"});
 				var grid = new Grid({
 					collection: collection,
+					columns: columns
 				}, 'compatGrid')
+				grid.startup();
 			});
 		</script>
 	</body>

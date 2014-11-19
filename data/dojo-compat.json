@@ -1,4 +1,13 @@
 [
-	{"id": "1.10.0", "ie11": "✓", "ff33": "s"},
-	{"id": "1.9.0", "ie11": "", "ff33": "s"}
+	{"id": "1.10.x", "ie11": "✓", "ff33": "s", "parent": null, "type": "minor"},
+	{"id": "1.10.2", "ie11": "✓", "ff33": "s", "parent": "1.10.x", "type": "point"},
+	{"id": "1.10.1", "ie11": "✓", "ff33": "s", "parent": "1.10.x", "type": "point"},
+	{"id": "1.10.0", "ie11": "✓", "ff33": "s", "parent": "1.10.x", "type": "point"},
+	{"id": "1.9.x", "ie11": "", "ff33": "s", "parent": null, "type": "minor"},
+	{"id": "1.9.5", "ie11": "", "ff33": "s", "parent": "1.9.x", "type": "point"},
+	{"id": "1.9.4", "ie11": "", "ff33": "s", "parent": "1.9.x", "type": "point"},
+	{"id": "1.9.3", "ie11": "", "ff33": "s", "parent": "1.9.x", "type": "point"},
+	{"id": "1.9.2", "ie11": "", "ff33": "s", "parent": "1.9.x", "type": "point"},
+	{"id": "1.9.1", "ie11": "", "ff33": "s", "parent": "1.9.x", "type": "point"},
+	{"id": "1.9.0", "ie11": "", "ff33": "s", "parent": "1.9.x", "type": "point"}
 ]
