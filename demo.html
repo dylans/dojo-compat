@@ -48,17 +48,16 @@
 				var collection = new Store({
 					target: 'data/dojo-compat.json'
 				}).filter({"type": "major"});
-				var grid = new Grid({
-					collection: collection,
-					columns: columns
-				}, 'compatGrid');
-				grid.startup();
+				collection.fetch().then(function () {
+					var grid = new Grid({
+						collection: collection,
+						columns: columns
+					}, 'compatGrid');
+					grid.startup();
+					grid.expand(grid.row('1.y.x'));
+				});
 				// TODO: Decide how to make the rendering more interesting
 				// TODO: Decide how to show notes or hints about a release (tooltip or a legend or ?)
-				// TODO, how to make sure filter has finished to not need a silly timeout? Do we move the creation of the collection into a forEach loop, and then create and startup the grid afterwards? I tried various promise approaches around the collection and filter, but they didn't seem to work?
-				window.setTimeout(function () {
-					grid.expand(grid.row('1.y.x'));
-				}, 1000);
 			});
 		</script>
 	</body>
